@@ -1,5 +1,6 @@
 <?php
 
+use app\components\AuthorHelper;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -15,6 +16,8 @@ $model->_authors = $model->authors;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->field($model, 'isbn')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'year')->textInput() ?>
@@ -24,8 +27,11 @@ $model->_authors = $model->authors;
     <?= $form->field($model, 'cover')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, '_authors')->listbox(
-        ArrayHelper::map(\app\models\Author::find()->all(),'id','name'),
-        ['multiple' => true]
+        ArrayHelper::map(AuthorHelper::getAllSorted(), 'id', 'name'),
+        [
+            'multiple' => 'multiple',
+            'size' => 10,
+        ]
     ) ?>
 
     <div class="form-group">

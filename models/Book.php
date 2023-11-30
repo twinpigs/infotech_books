@@ -11,6 +11,7 @@ use Yii;
  * @property string $title
  * @property int $year
  * @property string|null $description
+ * @property string $isbn
  * @property string|null $cover
  *
  * @property Author[] $authors
@@ -32,10 +33,12 @@ class Book extends \app\components\base\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'year'], 'required'],
+            [['title', 'year', 'isbn'], 'required'],
             [['year'], 'integer'],
             [['description'], 'string'],
             [['title', 'cover'], 'string', 'max' => 255],
+            [['isbn'], 'string', 'max' => 13],
+            [['isbn'], 'unique'],
             ['_authors', 'each', 'rule' => ['exist', 'skipOnError' => true, 'targetClass' => Author::class, 'targetAttribute' => ['_authors' => 'id']]]
         ];
     }
@@ -50,6 +53,7 @@ class Book extends \app\components\base\ActiveRecord
             'title' => 'Title',
             'year' => 'Year',
             'description' => 'Description',
+            'isbn' => 'ISBN',
             'cover' => 'Cover',
         ];
     }
