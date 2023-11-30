@@ -10,7 +10,7 @@ use Yii;
  * @property int $id
  * @property string $name
  *
- * @property AuthorHasBook[] $authorHasBooks
+ * @property Book[] $books
  */
 class Author extends \app\components\base\ActiveRecord
 {
@@ -45,12 +45,12 @@ class Author extends \app\components\base\ActiveRecord
     }
 
     /**
-     * Gets query for [[AuthorHasBooks]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getAuthorHasBooks()
+    public function getBooks()
     {
-        return $this->hasMany(AuthorHasBook::class, ['author_id' => 'id']);
+        return $this->hasMany(Book::class, ['id' => 'book_id'])
+            ->viaTable('author_has_book', ['author_id' => 'id']);
     }
 }
