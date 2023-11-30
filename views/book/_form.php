@@ -1,11 +1,14 @@
 <?php
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
 /** @var app\models\Book $model */
 /** @var yii\widgets\ActiveForm $form */
+
+$model->_authors = $model->authors;
 ?>
 
 <div class="book-form">
@@ -19,6 +22,11 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'cover')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, '_authors')->listbox(
+        ArrayHelper::map(\app\models\Author::find()->all(),'id','name'),
+        ['multiple' => true]
+    ) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

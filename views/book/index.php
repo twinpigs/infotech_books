@@ -46,7 +46,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => ActionColumn::class,
                 'urlCreator' => function ($action, Book $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                }
+                },
+                'template' => Yii::$app->user->isGuest ? '{view}' : '{view} {update} {delete}',
             ],
         ],
     ]); ?>

@@ -25,7 +25,6 @@ class m231130_085926_create_book_table extends Migration
         $this->createIndex('idx-book-title', $this->table_name, 'title');
         $this->createIndex('idx-book-year', $this->table_name, 'year');
         $this->createIndex('uidx-book-isbn', $this->table_name, 'isbn', true);
-        $this->createIndex('uidx-book-cover', $this->table_name, 'cover', true);
     }
 
     /**
@@ -36,7 +35,6 @@ class m231130_085926_create_book_table extends Migration
         $this->dropIndex('idx-book-title', $this->table_name);
         $this->dropIndex('idx-book-year', $this->table_name);
         $this->dropIndex('uidx-book-isbn', $this->table_name);
-        $this->dropIndex('uidx-book-cover', $this->table_name);
         $this->dropTable($this->table_name);
     }
 }

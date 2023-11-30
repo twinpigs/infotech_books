@@ -17,6 +17,7 @@ use Yii;
  */
 class Book extends \app\components\base\ActiveRecord
 {
+    public $_authors;
     /**
      * {@inheritdoc}
      */
@@ -35,7 +36,7 @@ class Book extends \app\components\base\ActiveRecord
             [['year'], 'integer'],
             [['description'], 'string'],
             [['title', 'cover'], 'string', 'max' => 255],
-            [['cover'], 'unique'],
+            ['_authors', 'each', 'rule' => ['exist', 'skipOnError' => true, 'targetClass' => Author::class, 'targetAttribute' => ['_authors' => 'id']]]
         ];
     }
 

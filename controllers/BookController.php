@@ -5,6 +5,8 @@ namespace app\controllers;
 use app\models\Book;
 use app\models\BookSearch;
 use app\components\base\Controller;
+use app\services\BookService;
+use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -21,6 +23,17 @@ class BookController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::class,
+                    'only' => ['create', 'update', 'delete'],
+                    'rules' => [
+                        [
+                            'actions' => ['create', 'update', 'delete'],
+                            'allow' => true,
+                            'roles' => ['@'],
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -70,7 +83,11 @@ class BookController extends Controller
         $model = new Book();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
+            if ($model->load($this->request->post())
+                && $model->validate()
+                && (new BookService(['model' => $model]))->save()
+            ) {
+
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -93,7 +110,9 @@ class BookController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        if ($this->request->isPost && $model->load($this->request->post())
+            && $model->validate()
+            && (new BookService(['model' => $model]))->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

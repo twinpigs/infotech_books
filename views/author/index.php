@@ -28,14 +28,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
             'name',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Author $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                 },
+                'template' => Yii::$app->user->isGuest ? '{view}' : '{view} {update} {delete}',
             ],
         ],
     ]); ?>
