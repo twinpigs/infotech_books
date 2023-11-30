@@ -12,9 +12,13 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+        'formatter' => [
+            'class' => 'app\components\base\Formatter',
+            'nullDisplay' => '',
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'hDsACqbsTnMToQDJRxkKC7gh0FPo1l3D',
+            'cookieValidationKey' => '',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',

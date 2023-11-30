@@ -17,8 +17,8 @@ class BookSearch extends Book
     public function rules()
     {
         return [
-            [['id', 'year'], 'integer'],
-            [['title', 'description', 'isbn', 'cover'], 'safe'],
+            [['year'], 'integer'],
+            [['title', 'description', 'isbn'], 'safe'],
         ];
     }
 
@@ -58,14 +58,12 @@ class BookSearch extends Book
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
             'year' => $this->year,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'isbn', $this->isbn])
-            ->andFilterWhere(['like', 'cover', $this->cover]);
+            ->andFilterWhere(['like', 'isbn', preg_replace("/\D/", '', $this->isbn)]);
 
         return $dataProvider;
     }

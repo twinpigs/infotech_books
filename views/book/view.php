@@ -1,5 +1,6 @@
 <?php
 
+use app\components\BookHelper;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -33,8 +34,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'year',
             'description:ntext',
-            'isbn',
-            'cover',
+            'isbn:isbn',
+            [
+                'attribute' => 'authors',
+                'format' => 'html',
+                'value' => BookHelper::authorsToHtml($model)
+            ],
         ],
     ]) ?>
 

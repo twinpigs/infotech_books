@@ -31,6 +31,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'name',
+            [
+                'attribute' => 'books',
+                'format' => 'html',
+                'value' => function ($data) {
+                    $items = [];
+                    foreach ($data->books as $book) {
+                        $items[] = Html::a($book->title, ['book/view', 'id' => $book->id]);
+                    }
+                    return $output = Html::ul($items, ['encode' => false]);
+                }
+            ],
         ],
     ]) ?>
 

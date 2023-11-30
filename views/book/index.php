@@ -1,5 +1,6 @@
 <?php
 
+use app\components\BookHelper;
 use app\models\Book;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -26,20 +27,26 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'emptyCell' => '',
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
             'title',
             'year',
+            [
+                'attribute' => 'authors',
+                'format' => 'html',
+                'value' => function ($model) {
+                    return BookHelper::authorsToHtml($model);
+                }
+            ],
             'description:ntext',
-            'isbn',
+            'isbn:isbn',
             //'cover',
             [
-                'class' => ActionColumn::className(),
+                'class' => ActionColumn::class,
                 'urlCreator' => function ($action, Book $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                }
             ],
         ],
     ]); ?>
