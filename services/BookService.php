@@ -45,11 +45,11 @@ class BookService extends \yii\base\Component
 
                 return true;
             } else {
-                throw new \Exception('Ничего не вышло');
+                throw new \Exception('Ничего не вышло, руины!');
             }
         } catch (\Throwable $e) {
             $transaction->rollback();
-            
+
             return false;
         }
     }

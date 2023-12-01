@@ -33,7 +33,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'year',
             [
-                'attribute' => 'authors',
+                'attribute' => '_authors',
+                'label' => 'Authors',
                 'format' => 'html',
                 'value' => function ($model) {
                     return BookHelper::authorsToHtml($model);

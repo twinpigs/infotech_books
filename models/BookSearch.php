@@ -5,6 +5,7 @@ namespace app\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Book;
+use yii\db\Expression;
 
 /**
  * BookSearch represents the model behind the search form of `app\models\Book`.
@@ -18,7 +19,7 @@ class BookSearch extends Book
     {
         return [
             [['year'], 'integer'],
-            [['title', 'description', 'isbn'], 'safe'],
+            [['title', 'description', 'isbn', '_authors'], 'safe'],
         ];
     }
 
@@ -64,6 +65,10 @@ class BookSearch extends Book
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'isbn', preg_replace("/\D/", '', $this->isbn)]);
+
+        if(!empty($this->_authors)) {
+            //TODO: search book by author
+        }
 
         return $dataProvider;
     }

@@ -37,7 +37,8 @@ class Book extends \app\components\base\ActiveRecord
             [['year'], 'integer'],
             [['description'], 'string'],
             [['title', 'cover'], 'string', 'max' => 255],
-            [['isbn'], 'string', 'max' => 13],
+            [['isbn'], 'integer'],
+            [['isbn'], 'string', 'max' => 13, 'min' => 13], //тут, на самом деле, валидадция по алгоритму, с контрольными числами и все такое
             [['isbn'], 'unique'],
             ['_authors', 'each', 'rule' => ['exist', 'skipOnError' => true, 'targetClass' => Author::class, 'targetAttribute' => ['_authors' => 'id']]]
         ];
