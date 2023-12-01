@@ -16,16 +16,16 @@ $model->_authors = $model->authors;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'isbn')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'isbn')->textInput(['maxlength' => true, 'placeholder' => '9785699120143']) ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'year')->textInput() ?>
+    <?= $form->field($model, 'year')->textInput(['placeholder' => '2023']) ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'cover')->textInput(['maxlength' => true]) ?>
-
+    <!--тут, конечно, должен быть подбор с асинхронным поиском, когда авторов станет больше-->
     <?= $form->field($model, '_authors')->listbox(
         ArrayHelper::map(AuthorHelper::getAllSorted(), 'id', 'name'),
         [

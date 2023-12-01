@@ -51,7 +51,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php if(Yii::$app->user->isGuest): ?>
         <?php $form = ActiveForm::begin() ?>
-        <?= $form->field($subscription_model, 'phone')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($subscription_model, 'phone',
+            ['template' => "{label}\n<div class=\"input-group\"><div class=\"input-group-prepend\">
+                            <div class=\"input-group-text\">+7</div></div>{input}</div>\n{hint}\n{error}"
+            ])
+            ->textInput(['maxlength' => true, 'placeholder' => '9272222222']) ?>
         <?= $form->field($subscription_model, 'author_id')->hiddenInput()->label(false) ?>
 
         <div class="form-group">
