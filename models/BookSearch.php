@@ -4,8 +4,7 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Book;
-use yii\db\Expression;
+use yii\db\Query;
 
 /**
  * BookSearch represents the model behind the search form of `app\models\Book`.
@@ -67,7 +66,16 @@ class BookSearch extends Book
             ->andFilterWhere(['like', 'isbn', preg_replace("/\D/", '', $this->isbn)]);
 
         if(!empty($this->_authors)) {
-            //TODO: search book by author
+            $query->andWhere('exists (' .
+                (new Query())
+                ->from('book bb')
+                ->select('bb.id')
+                ->innerJoin('author_has_book ahb', 'bb.id = ahb.book_id')
+                ->innerJoin('author aa', 'ahb.author_id = aa.id')
+                ->andWhere(['like', 'aa.name', $this->_authors])
+                ->andWhere('bb.id = book.id')
+                ->createCommand()->rawSql . ')'
+            );
         }
 
         return $dataProvider;
