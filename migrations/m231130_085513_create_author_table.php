@@ -26,7 +26,6 @@ class m231130_085513_create_author_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropIndex('idx-author-name', $this->table_name);
         $this->dropTable($this->table_name);
     }
 }

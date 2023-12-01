@@ -44,19 +44,4 @@ class m231130_094846_seed_data extends Migration
         $this->delete(\app\models\Book::tableName());
         $this->delete(\app\models\Author::tableName());
     }
-
-    /*
-    // Use up()/down() to run migration code without a transaction.
-    public function up()
-    {
-
-    }
-
-    public function down()
-    {
-        echo "m231130_094846_seed_data cannot be reverted.\n";
-
-        return false;
-    }
-    */
 }

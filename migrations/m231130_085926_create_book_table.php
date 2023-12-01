@@ -32,9 +32,6 @@ class m231130_085926_create_book_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropIndex('idx-book-title', $this->table_name);
-        $this->dropIndex('idx-book-year', $this->table_name);
-        $this->dropIndex('uidx-book-isbn', $this->table_name);
         $this->dropTable($this->table_name);
     }
 }

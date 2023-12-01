@@ -1,10 +1,12 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
 /** @var app\models\Author $model */
+/** @var app\models\Subscription $subscription_model */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Authors', 'url' => ['index']];
@@ -46,5 +48,16 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]) ?>
+
+    <?php if(Yii::$app->user->isGuest): ?>
+        <?php $form = ActiveForm::begin() ?>
+        <?= $form->field($subscription_model, 'phone')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($subscription_model, 'author_id')->hiddenInput()->label(false) ?>
+
+        <div class="form-group">
+            <?= Html::submitButton('Subscribe', ['class' => 'btn btn-success']) ?>
+        </div>
+        <?php ActiveForm::end(); ?>
+    <?php endif; ?>
 
 </div>

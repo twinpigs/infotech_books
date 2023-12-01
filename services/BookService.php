@@ -2,7 +2,9 @@
 
 namespace app\services;
 
+use app\models\Author;
 use app\models\Book;
+use app\models\Subscription;
 use Yii;
 
 
@@ -10,9 +12,12 @@ class BookService extends \yii\base\Component
 {
     public Book $model;
 
-    private function scheduleSMS($authors_ids, $book_id)
+    private function scheduleSMS($authors_ids)
     {
-
+        //но если книгу (или автора из книги) сразу удалят, то извините, пуля, скорее всего, вылетела
+        //в задаче, не сказано прямо, что надо указывать так же и книгу )
+        //TODO: добавить в оповещение инфу по конкретной книге
+        Subscription::updateAll(['scheduled' => true], ['author_id' => $authors_ids]);
     }
 
     public function save(): bool
@@ -41,7 +46,7 @@ class BookService extends \yii\base\Component
                     )->execute();
                 }
                 $transaction->commit();
-                $this->scheduleSMS($authors_to_sms, $this->model->id);
+                $this->scheduleSMS($authors_to_sms);
 
                 return true;
             } else {

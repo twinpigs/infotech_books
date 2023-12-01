@@ -5,6 +5,8 @@ namespace app\controllers;
 use app\models\Author;
 use app\models\AuthorSearch;
 use app\components\base\Controller;
+use app\models\SubscriptionForm;
+use Yii;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -67,8 +69,17 @@ class AuthorController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $subscription_model = new SubscriptionForm();
+        if ($subscription_model->load(Yii::$app->request->post()) && $message = $subscription_model->subscribe()) {
+            Yii::$app->session->setFlash('info', $message);
+
+            return $this->refresh();
+        }
+        $subscription_model->author_id = $model->id;
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'subscription_model' => $subscription_model,
         ]);
     }
 
