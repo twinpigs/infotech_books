@@ -104,7 +104,7 @@ class Book extends \app\components\base\ActiveRecord
         }
     }
 
-    private function getCurrentCoverPath(): false|string|null
+    private function getCurrentCoverPath(): ?string
     {
         $result = null;
         if($this->cover) {
