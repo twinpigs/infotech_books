@@ -53,6 +53,10 @@ You can then access the application through the following URL:
 
     http://127.0.0.1:8000
 
+Чтобы заработали чудо-очереди:
+
+    docker-compose run php php yii queue/listen
+
 CONFIGURATION
 -------------
 
