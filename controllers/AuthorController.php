@@ -71,7 +71,11 @@ class AuthorController extends Controller
     {
         $model = $this->findModel($id);
         $subscription_model = new SubscriptionForm();
-        if ($subscription_model->load(Yii::$app->request->post()) && $message = $subscription_model->subscribe()) {
+        if (
+            in_array($mode = Yii::$app->request->post('mode'), ['subscribe', 'unsubscribe'])
+            && $subscription_model->load(Yii::$app->request->post())
+            && $message = $subscription_model->$mode()
+        ) {
             Yii::$app->session->setFlash('info', $message);
 
             return $this->refresh();

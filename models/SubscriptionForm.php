@@ -6,8 +6,9 @@ use yii\base\Model;
 
 class SubscriptionForm extends Model
 {
-    const MESSAGE_FAIL = 'Не удалось вас подписать, сорян';
-    const MESSAGE_SUCCESS = 'Вы подписаны';
+    const MESSAGE_SUBSCRIBE_FAIL = 'Не удалось вас подписать, сорян';
+    const MESSAGE_SUBSCRIBE_SUCCESS = 'Вы подписаны';
+    const MESSAGE_UNSUBSCRIBE_SUCCESS = 'Вы отписаны';
 
 
     public $phone;
@@ -29,7 +30,7 @@ class SubscriptionForm extends Model
             $phone_to_subscribe = new Phone();
             $phone_to_subscribe->phone = $this->phone;
             if(!$phone_to_subscribe->save()) {
-                return static::MESSAGE_FAIL;
+                return static::MESSAGE_SUBSCRIBE_FAIL;
             }
         }
         if(!Subscription::find()->exists()) {
@@ -38,10 +39,20 @@ class SubscriptionForm extends Model
             $new_subscription->author_id = $this->author_id;
             if(!$new_subscription->save()) {
 
-                return static::MESSAGE_FAIL;
+                return static::MESSAGE_SUBSCRIBE_FAIL;
             }
         }
 
-        return static::MESSAGE_SUCCESS;
+        return static::MESSAGE_SUBSCRIBE_SUCCESS;
+    }
+
+    public function unsubscribe(): string
+    {
+        $phone_to_unsubscribe = Phone::findOne(['phone' => $this->phone]);
+        if($phone_to_unsubscribe) {
+            Subscription::deleteAll(['phone_id' => $phone_to_unsubscribe->id, 'author_id' => $this->author_id]);
+        }
+
+        return static::MESSAGE_UNSUBSCRIBE_SUCCESS;
     }
 }

@@ -59,9 +59,12 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($subscription_model, 'author_id')->hiddenInput()->label(false) ?>
 
         <div class="form-group">
-            <?= Html::submitButton('Subscribe', ['class' => 'btn btn-success']) ?>
+            <?= Html::submitButton('Subscribe', ['class' => 'btn btn-success', 'name' => 'mode', 'value' => 'subscribe']) ?>
+            <?= Html::submitButton('Unsubscribe', ['class' => 'btn btn-danger', 'name' => 'mode', 'value' => 'unsubscribe']) ?>
         </div>
         <?php ActiveForm::end(); ?>
+        <p>В реальной жизни подразумевается, что вы решили капчу, и успешно ввели код подтверждения, которые как будто бы были вам показаны и отправлены.
+        Ничего этого нету тут, но можно добавить. Потом )</p>
     <?php endif; ?>
 
 </div>

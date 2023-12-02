@@ -19,7 +19,6 @@ class m231201_081322_create_subscription_table extends Migration
             'id' => $this->primaryKey(),
             'phone_id' => $this->integer()->notNull(),
             'author_id' => $this->integer()->notNull(),
-            'scheduled' => $this->boolean()->notNull()->defaultValue(false)
         ]);
 
         $this->createIndex(
@@ -27,11 +26,6 @@ class m231201_081322_create_subscription_table extends Migration
             $this->table_name,
             ['phone_id', 'author_id'],
             true
-        );
-        $this->createIndex(
-            'uidx-subscription-scheduled',
-            $this->table_name,
-            'scheduled',
         );
         $this->addForeignKey(
             'fk-subscription-phone_id-phone-id',
