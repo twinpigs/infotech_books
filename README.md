@@ -45,7 +45,7 @@ Yii2 requires permissions to write to some folders.
 Assuming that we are making a quick installation for development needs without strict security requirements, we use the simplest way to grant these permissions:
 
 ```bash
-chmod -R 777 web/assets
+chmod -R 777 web
 chmod -R 777 runtime
 ```
     

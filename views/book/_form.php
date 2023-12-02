@@ -30,7 +30,7 @@ $model->_remove_cover = false;
         <?= $form->field($model, '_remove_cover')->checkbox() ?>
     <?php endif; ?>
     <?= $form->field($model, '_cover')->fileInput() ?>
-    <!--тут, конечно, должен быть подбор с асинхронным поиском, когда авторов станет больше-->
+    <p>Далее такой красивый виджет, подбор с асинхронным поиском, а то авторов многовато.</p>
     <?= $form->field($model, '_authors')->listbox(
         ArrayHelper::map(AuthorHelper::getAllSorted(), 'id', 'name'),
         [
