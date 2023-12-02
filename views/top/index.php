@@ -1,8 +1,10 @@
 <?php
 /** @var yii\web\View $this */
 /** @var array $years */
+$this->title = 'Top 10';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1>top/index</h1>
+<h1><?= $this->title ?></h1>
 
 <p>
     <?= \yii\helpers\Html::ul(
