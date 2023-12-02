@@ -10,6 +10,7 @@ use yii\widgets\ActiveForm;
 /** @var yii\widgets\ActiveForm $form */
 
 $model->_authors = $model->authors;
+$model->_remove_cover = false;
 ?>
 
 <div class="book-form">
@@ -24,7 +25,11 @@ $model->_authors = $model->authors;
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'cover')->textInput(['maxlength' => true]) ?>
+    <?php if($model->cover && file_exists(Yii::getAlias('@webroot/covers/' . $model->cover))): ?>
+        <img src="<?= '/covers/' . $model->cover ?>" alt="cover" class="img-thumbnail">
+        <?= $form->field($model, '_remove_cover')->checkbox() ?>
+    <?php endif; ?>
+    <?= $form->field($model, '_cover')->fileInput() ?>
     <!--тут, конечно, должен быть подбор с асинхронным поиском, когда авторов станет больше-->
     <?= $form->field($model, '_authors')->listbox(
         ArrayHelper::map(AuthorHelper::getAllSorted(), 'id', 'name'),

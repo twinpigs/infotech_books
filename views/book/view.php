@@ -44,5 +44,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]) ?>
+    <?php if($model->cover && file_exists(Yii::getAlias('@webroot/covers/' . $model->cover))): ?>
+        <img src="<?= '/covers/' . $model->cover ?>" alt="cover" class="img-thumbnail">
+    <?php endif; ?>
 
 </div>

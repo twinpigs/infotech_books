@@ -5,6 +5,7 @@ namespace app\services;
 use app\components\SmsSender;
 use app\models\Book;
 use Yii;
+use yii\web\UploadedFile;
 
 
 class BookService extends \yii\base\Component
@@ -29,7 +30,8 @@ class BookService extends \yii\base\Component
         }
         $authors_to_sms = array_diff($new_authors_ids, $old_authors_ids);
         try {
-            if ($this->model->save()) {
+            $this->model->_cover = UploadedFile::getInstance($this->model, '_cover');
+            if ($this->model->save() && $this->model->upload()) {
                 $this->model->refresh();
                 Yii::$app->db->createCommand()->delete(
                     'author_has_book',
@@ -55,6 +57,7 @@ class BookService extends \yii\base\Component
             }
         } catch (\Throwable $e) {
             $transaction->rollback();
+            //TODO: в перспективе надо как-то признаться пользователю... потом...
 
             return false;
         }
