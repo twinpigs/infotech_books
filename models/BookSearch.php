@@ -63,7 +63,7 @@ class BookSearch extends Book
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'isbn', preg_replace("/\D/", '', $this->isbn)]);
+            ->andFilterWhere(['like', 'isbn', preg_replace("/\D/", '', $this->isbn ?? '')]);
 
         if(!empty($this->_authors)) {
             $query->andWhere('exists (' .
