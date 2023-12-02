@@ -36,6 +36,10 @@ Start the container
 
     docker-compose up -d
 
+Накатить миграции
+
+    docker-compose run php php yii migrate
+
 #### Under Linux additionally:
 Yii2 requires permissions to write to some folders. 
 Assuming that we are making a quick installation for development needs without strict security requirements, we use the simplest way to grant these permissions:
