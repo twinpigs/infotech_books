@@ -92,6 +92,7 @@ class Book extends \app\components\base\ActiveRecord
             }
             $src = md5($this->_cover->baseName . time()) . '.' . $this->_cover->extension;
             //TODO: отресайзить же
+            //TODO: по папкам надо раскидать, например по последним/первым (двум?) буквам хеша, чтобы много файлов не копилось в одной
             $this->_cover->saveAs(Yii::getAlias('@webroot/covers/' . $src));
             $old_cover = $this->getCurrentCoverPath();
             $this->cover = $src;
