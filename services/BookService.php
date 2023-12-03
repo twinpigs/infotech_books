@@ -31,7 +31,7 @@ class BookService extends \yii\base\Component
         $authors_to_sms = array_diff($new_authors_ids, $old_authors_ids);
         try {
             $this->model->_cover = UploadedFile::getInstance($this->model, '_cover');
-            if ($this->model->save() && $this->model->upload()) {
+            if ($this->model->save() && $this->model->manageCover()) {
                 $this->model->refresh();
                 Yii::$app->db->createCommand()->delete(
                     'author_has_book',

@@ -74,7 +74,7 @@ class Book extends \app\components\base\ActiveRecord
             ->viaTable('author_has_book', ['book_id' => 'id']);
     }
 
-    public function upload(): bool
+    public function manageCover(): bool
     {
         if(!!$this->_remove_cover && !$this->_cover) {
             $old_cover = $this->getCurrentCoverPath();
