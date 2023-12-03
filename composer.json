@@ -12,19 +12,20 @@
         "irc": "ircs://irc.libera.chat:6697/yii",
         "source": "https://github.com/yiisoft/yii2"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
         "php": ">=7.4.0",
         "yiisoft/yii2": "~2.0.45",
         "yiisoft/yii2-bootstrap5": "~2.0.2",
         "yiisoft/yii2-symfonymailer": "~2.0.3",
-        "enqueue/amqp-lib": "0.9.x-dev",
-        "yiisoft/yii2-queue": "^2.0@dev"
+        "yiisoft/yii2-queue": "^2.3",
+        "enqueue/amqp-lib": "^0.9.12"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
         "yiisoft/yii2-gii": "~2.2.0",
         "yiisoft/yii2-faker": "~2.0.0",
+        "phpunit/phpunit": "~9.5.0",
         "codeception/codeception": "^5.0.0 || ^4.0",
         "codeception/lib-innerbrowser": "^4.0 || ^3.0 || ^1.1",
         "codeception/module-asserts": "^3.0 || ^1.1",
