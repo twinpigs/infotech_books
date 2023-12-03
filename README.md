@@ -23,12 +23,8 @@ INSTALLATION
 ------------
 
 ### Install with Docker
-
-Update your vendor packages
-
-    docker-compose run --rm php composer update --prefer-dist
     
-Run the installation triggers (creating cookie validation code)
+Подтянуть либы
 
     docker-compose run --rm php composer install    
     
