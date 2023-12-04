@@ -131,6 +131,7 @@ class BookController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+        //TODO: тут (а скоре обратившись к нашему "сервису") надо удалить обложку, так или иначе. Забыл ))
 
         return $this->redirect(['index']);
     }
